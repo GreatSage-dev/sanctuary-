@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Shield, Lock, EyeOff, Zap, ArrowRight, Cpu } from "lucide-react";
+import { Shield, Lock, Cpu } from "lucide-react";
 
 export const GarbledShowcaseSection: React.FC = () => {
   const cards = [
@@ -88,20 +87,11 @@ export const GarbledShowcaseSection: React.FC = () => {
                 </p>
 
                 {/* Translucent Code Box */}
-                <div className="p-3.5 rounded-xl bg-purple-50/70 border border-purple-100 font-mono text-[11px] text-coti-violet font-semibold break-all mb-6">
+                <div className="p-3.5 rounded-xl bg-purple-50/70 border border-purple-100 font-mono text-[11px] text-coti-violet font-semibold break-all">
                   <span className="text-[10px] text-gray-400 block mb-0.5 font-normal">State Output:</span>
                   {card.codePreview}
                 </div>
               </div>
-
-              {/* Action Button */}
-              <Link
-                href="/vault"
-                className="w-full py-3 px-5 rounded-full bg-[#1A1A1A] hover:bg-[#2D2D2D] text-white text-[12px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-btn-black hover:shadow-btn-black-hover"
-              >
-                <span>Configure Vault</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
             </motion.div>
           );
         })}
