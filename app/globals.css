@@ -9,14 +9,22 @@
   --border-subtle: rgba(0, 0, 0, 0.06);
 }
 
+.dark {
+  --canvas-bg: #08080A;
+  --text-main: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --border-subtle: rgba(255, 255, 255, 0.12);
+}
+
 body {
   background-color: var(--canvas-bg);
   color: var(--text-main);
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ── Light-Theme Premium Frosted Glassmorphism ── */
+/* ── Light & Dark Frosted Glassmorphism ── */
 .glass-card-frosted {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(24px) saturate(190%);
@@ -24,6 +32,12 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   border-radius: 1.75rem;
+}
+
+.dark .glass-card-frosted {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.56);
 }
 
 .glass-card-frosted-hover {
@@ -37,7 +51,13 @@ body {
   box-shadow: 0 30px 70px -12px rgba(139, 92, 246, 0.18), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
-/* Light Glass Pill Header */
+.dark .glass-card-frosted-hover:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 40px 80px -16px rgba(139, 92, 246, 0.25);
+}
+
+/* Light & Dark Glass Pill Header */
 .glass-pill-light {
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(20px) saturate(180%);
@@ -47,11 +67,25 @@ body {
   border-radius: 9999px;
 }
 
+.dark .glass-pill-light {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
 .card-white {
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 1.5rem;
   box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.04);
+  color: #1A1A1A;
+}
+
+.dark .card-white {
+  background: #0D0E12;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.4);
+  color: #F3F4F6;
 }
 
 .card-obsidian {
@@ -66,9 +100,17 @@ body {
   background: radial-gradient(100% 100% at 50% 0%, #EDE9FE 0%, #F3E8FF 50%, #F5F5F7 100%);
 }
 
+.dark .hero-gradient {
+  background: radial-gradient(100% 100% at 50% 0%, rgba(139, 92, 246, 0.25) 0%, rgba(91, 33, 182, 0.1) 50%, #08080A 100%);
+}
+
 .section-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.08) 50%, transparent 100%);
+}
+
+.dark .section-divider {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
 }
 
 .pulse-dot {
@@ -81,5 +123,44 @@ body {
   }
   50% {
     opacity: 0.3;
+  }
+}
+
+/* ── Mobile Phone Media Queries (320px - 768px Viewports) ── */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .glass-pill-light {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Prevent horizontal scroll & word clip */
+  input, button {
+    touch-action: manipulation;
+  }
+
+  /* Compact padding on mobile */
+  .card-white, .card-obsidian, .glass-card-frosted {
+    padding: 1.25rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  /* Disable sticky height locks on small screens to prevent layout overflow */
+  .mobile-auto-height {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+/* System Dark Mode Preference Media Query */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --canvas-bg: #08080A;
+    --text-main: #F3F4F6;
+    --text-muted: #9CA3AF;
+    --border-subtle: rgba(255, 255, 255, 0.12);
   }
 }

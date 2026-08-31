@@ -1,107 +1,83 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { ArrowLeft, Shield, Lock } from "lucide-react";
+import { Shield, Settings, Moon, Sun } from "lucide-react";
 
 interface AppHeaderProps {
   onOpenPolicyModal: () => void;
 }
 
 export const AppHeader: React.FC<AppHeaderProps> = ({ onOpenPolicyModal }) => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (document.documentElement.classList.contains("dark")) {
+      setIsDark(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    }
+  };
+
   return (
-    <header className="w-full px-6 md:px-10 py-5 max-w-7xl mx-auto flex items-center justify-between border-b border-border-subtle">
-      {/* Brand & Back Link */}
-      <div className="flex items-center gap-4">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-[12px] font-medium text-[#6B7280] hover:text-[#1A1A1A] transition-colors"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Home</span>
+    <header className="sticky top-4 z-50 w-full px-4 sm:px-6 max-w-7xl mx-auto">
+      <div className="glass-pill-light px-4 sm:px-8 py-3 flex items-center justify-between shadow-card-rest border border-white/80 dark:border-white/15 bg-white/75 dark:bg-white/[0.06] backdrop-blur-xl">
+        {/* Brand Logo */}
+        <Link href="/" className="flex items-center gap-2 cursor-pointer">
+          <div className="w-8 h-8 rounded-xl bg-[#1A1A1A] dark:bg-white text-white dark:text-[#0D0E12] flex items-center justify-center font-bold shadow-md">
+            <Shield className="w-4 h-4 text-coti-emerald" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-extrabold text-[15px] tracking-tight text-[#1A1A1A] dark:text-white leading-none">
+              SANCTUARY
+            </span>
+            <span className="text-[9px] font-mono text-coti-violet font-semibold tracking-widest uppercase mt-0.5">
+              COTI V2 VAULT
+            </span>
+          </div>
         </Link>
-        <div className="h-4 w-px bg-border-subtle" />
-        <Link href="/vault" className="flex items-center gap-2">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M12 2L4 6V12C4 16.42 7.4 20.56 12 22C16.6 20.56 20 16.42 20 12V6L12 2Z"
-              stroke="#1A1A1A"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+
+        {/* Right Actions */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-canvas dark:bg-white/10 border border-border-subtle dark:border-white/15 flex items-center justify-center text-[#6B7280] dark:text-gray-300 hover:text-[#1A1A1A] dark:hover:text-white transition-colors"
+          >
+            {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-purple-600" />}
+          </button>
+
+          {/* Configure Policy Modal Button */}
+          <button
+            onClick={onOpenPolicyModal}
+            className="px-3 sm:px-4 py-2 rounded-full bg-canvas dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 border border-border-subtle dark:border-white/15 text-[11px] sm:text-[12px] font-semibold text-[#1A1A1A] dark:text-white transition-colors flex items-center gap-1.5"
+          >
+            <Settings className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Configure Policy</span>
+          </button>
+
+          {/* RainbowKit Wallet Connect Button */}
+          <div className="shrink-0">
+            <ConnectButton
+              showBalance={false}
+              accountStatus={{
+                smallScreen: "avatar",
+                largeScreen: "full",
+              }}
+              chainStatus="icon"
             />
-            <path d="M12 8V12M12 16H12.01" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-          <span className="font-extrabold text-[16px] tracking-[-0.03em] text-[#1A1A1A]">
-            SANCTUARY <span className="text-coti-violet text-[12px] font-mono font-bold uppercase ml-1">VAULT</span>
-          </span>
-        </Link>
-      </div>
-
-      {/* Header Actions */}
-      <div className="flex items-center gap-3">
-        {/* Policy Modal Trigger */}
-        <button
-          onClick={onOpenPolicyModal}
-          className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full bg-canvas border border-border-subtle hover:border-[#D1D5DB] text-[12px] font-semibold text-[#1A1A1A] transition-all duration-300"
-        >
-          <Lock className="w-3.5 h-3.5 text-coti-violet" />
-          <span>Configure Policy</span>
-        </button>
-
-        {/* RainbowKit Wallet Button */}
-        <ConnectButton.Custom>
-          {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
-            const ready = mounted;
-            const connected = ready && account && chain;
-
-            return (
-              <div
-                {...(!ready && {
-                  "aria-hidden": true,
-                  style: { opacity: 0, pointerEvents: "none", userSelect: "none" },
-                })}
-              >
-                {(() => {
-                  if (!connected) {
-                    return (
-                      <button
-                        onClick={openConnectModal}
-                        className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#2D2D2D] text-white text-[13px] font-semibold transition-all duration-300 shadow-btn-black hover:-translate-y-0.5"
-                      >
-                        Connect Wallet
-                      </button>
-                    );
-                  }
-
-                  if (chain.unsupported) {
-                    return (
-                      <button
-                        onClick={openChainModal}
-                        className="px-5 py-2.5 rounded-full bg-red-600 text-white text-[13px] font-semibold"
-                      >
-                        Wrong Network
-                      </button>
-                    );
-                  }
-
-                  return (
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={openAccountModal}
-                        className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#2D2D2D] text-white text-[13px] font-semibold transition-all duration-300 shadow-btn-black hover:-translate-y-0.5"
-                      >
-                        <span>{account.displayName}</span>
-                        <span className="w-2 h-2 rounded-full bg-coti-emerald" />
-                      </button>
-                    </div>
-                  );
-                })()}
-              </div>
-            );
-          }}
-        </ConnectButton.Custom>
+          </div>
+        </div>
       </div>
     </header>
   );

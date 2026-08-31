@@ -8,21 +8,18 @@ export const ScrollJourney: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
 
-  // Track scroll progress within the 280vh container runway
+  // Track scroll progress within the 280vh container runway for desktop
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Transform scroll progress (0 -> 1) into vertical translation for the right cards column
-  // Each card is ~360px high + 48px gap = 408px shift per step
   const cardTranslateY = useTransform(
     scrollYProgress,
     [0, 0.33, 0.66, 1],
     ["0px", "0px", "-408px", "-816px"]
   );
 
-  // Sync active step state based on scroll progress thresholds
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (latest < 0.33) {
       setActiveStep(0);
@@ -61,124 +58,165 @@ export const ScrollJourney: React.FC = () => {
   ];
 
   return (
-    <div ref={containerRef} id="how-it-works" className="relative h-[280vh] w-full">
-      {/* ── STICKY PINNED VIEWPORT CONTAINER (Locks in screen while right side scrolls) ── */}
-      <div className="sticky top-20 h-[82vh] max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center overflow-hidden">
-        <div className="section-divider mb-8" />
+    <>
+      {/* ── DESKTOP STICKY PINNED SCROLL JOURNEY (>= 1024px) ── */}
+      <div ref={containerRef} id="how-it-works" className="hidden lg:block relative h-[280vh] w-full">
+        <div className="sticky top-20 h-[82vh] max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center overflow-hidden">
+          <div className="section-divider mb-8" />
 
-        {/* Section Header */}
-        <div className="text-center mb-10 shrink-0">
-          <p className="text-[12px] font-mono font-bold uppercase tracking-widest text-[#6B7280]">
+          {/* Section Header */}
+          <div className="text-center mb-10 shrink-0">
+            <p className="text-[12px] font-mono font-bold uppercase tracking-widest text-[#6B7280] dark:text-purple-300">
+              THE SANCTUARY JOURNEY
+            </p>
+            <h2 className="text-[32px] md:text-[44px] font-extrabold tracking-tighter leading-[1.05] text-[#1A1A1A] dark:text-white mt-1">
+              How Sanctuary Secures Your Legacy
+            </h2>
+          </div>
+
+          {/* Pinned 2-Column Grid */}
+          <div className="grid grid-cols-12 gap-8 items-center relative overflow-hidden">
+            {/* Left Column: STICKY PINNED STEP PILLS */}
+            <div className="col-span-4 space-y-3 shrink-0">
+              {steps.map((step, idx) => {
+                const isActive = activeStep === idx;
+                const Icon = step.icon;
+                return (
+                  <div
+                    key={step.num}
+                    className={`p-5 rounded-2xl border transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ${
+                      isActive
+                        ? "bg-white dark:bg-white/10 border-[#1A1A1A] dark:border-purple-500/50 shadow-card-hover -translate-y-0.5"
+                        : "bg-canvas dark:bg-white/[0.02] border-border-subtle dark:border-white/10 opacity-60"
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activePillIndicator"
+                        className="absolute left-0 top-0 bottom-0 w-1 bg-[#1A1A1A] dark:bg-purple-400"
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
+
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[11px] font-mono font-bold uppercase text-coti-violet">
+                        0{step.num} — {step.badge}
+                      </span>
+                      <div
+                        className={`w-6 h-6 rounded-lg flex items-center justify-center transition-colors ${
+                          isActive ? "bg-[#1A1A1A] dark:bg-purple-600 text-white" : "bg-gray-200 dark:bg-white/10 text-[#6B7280]"
+                        }`}
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
+                    <h3
+                      className={`text-[15px] font-bold tracking-tight ${
+                        isActive ? "text-[#1A1A1A] dark:text-white" : "text-[#6B7280] dark:text-gray-400"
+                      }`}
+                    >
+                      {step.kicker}
+                    </h3>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Right Column: SCROLL-MASKED CONTENT CARDS */}
+            <div className="col-span-8 h-[360px] overflow-hidden relative rounded-3xl">
+              <motion.div style={{ y: cardTranslateY }} className="space-y-12">
+                {steps.map((step, idx) => (
+                  <div
+                    key={step.num}
+                    className={`card-white p-8 md:p-10 h-[360px] flex flex-col justify-between border transition-all duration-500 relative overflow-hidden shrink-0 ${
+                      activeStep === idx
+                        ? "border-[#1A1A1A] dark:border-purple-500/40 shadow-card-elevated bg-white dark:bg-white/[0.06]"
+                        : "border-border-subtle dark:border-white/10 opacity-60 bg-canvas dark:bg-white/[0.02]"
+                    }`}
+                  >
+                    {activeStep === idx && (
+                      <div className="absolute top-0 right-0 w-80 h-80 bg-purple-50 dark:bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+                    )}
+
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[12px] font-mono font-bold uppercase tracking-wider text-coti-violet">
+                          STEP 0{step.num} • {step.badge}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          {[0, 1, 2].map((dot) => (
+                            <div
+                              key={dot}
+                              className={`h-1.5 rounded-full transition-all duration-300 ${
+                                dot === idx ? "w-6 bg-coti-violet" : "w-1.5 bg-gray-200 dark:bg-white/20"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      <h3 className="text-[24px] md:text-[32px] font-extrabold tracking-tight text-[#1A1A1A] dark:text-white leading-[1.1] mb-3">
+                        {step.title}
+                      </h3>
+                      <p className="text-[14px] text-[#6B7280] dark:text-gray-300 leading-relaxed max-w-xl">
+                        {step.body}
+                      </p>
+                    </div>
+
+                    <div className="relative z-10 pt-4 border-t border-border-subtle dark:border-white/10 flex items-center justify-between text-[12px] font-mono font-semibold text-[#1A1A1A] dark:text-white">
+                      <span>COTI V2 MPC Architecture</span>
+                      <span className="flex items-center gap-1 text-coti-violet">
+                        Phase 0{step.num} Active <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── MOBILE TOUCH SCROLL JOURNEY (< 1024px) ── */}
+      <div className="lg:hidden w-full max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-8">
+        <div className="text-center">
+          <p className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#6B7280] dark:text-purple-300">
             THE SANCTUARY JOURNEY
           </p>
-          <h2 className="text-[32px] md:text-[44px] font-extrabold tracking-tighter leading-[1.05] text-[#1A1A1A] mt-1">
+          <h2 className="text-[26px] sm:text-[32px] font-extrabold tracking-tight text-[#1A1A1A] dark:text-white mt-1">
             How Sanctuary Secures Your Legacy
           </h2>
         </div>
 
-        {/* Pinned 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative overflow-hidden">
-          {/* Left Column: STICKY PINNED STEP PILLS */}
-          <div className="lg:col-span-4 space-y-3 shrink-0">
-            {steps.map((step, idx) => {
-              const isActive = activeStep === idx;
-              const Icon = step.icon;
-              return (
-                <div
-                  key={step.num}
-                  className={`p-5 rounded-2xl border transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ${
-                    isActive
-                      ? "bg-white border-[#1A1A1A] shadow-card-hover -translate-y-0.5"
-                      : "bg-canvas border-border-subtle opacity-60"
-                  }`}
-                >
-                  {/* Active Indicator Bar */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activePillIndicator"
-                      className="absolute left-0 top-0 bottom-0 w-1 bg-[#1A1A1A]"
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
-
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[11px] font-mono font-bold uppercase text-coti-violet">
-                      0{step.num} — {step.badge}
-                    </span>
-                    <div
-                      className={`w-6 h-6 rounded-lg flex items-center justify-center transition-colors ${
-                        isActive ? "bg-[#1A1A1A] text-white" : "bg-gray-200 text-[#6B7280]"
-                      }`}
-                    >
-                      <Icon className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-                  <h3
-                    className={`text-[15px] font-bold tracking-tight ${
-                      isActive ? "text-[#1A1A1A]" : "text-[#6B7280]"
-                    }`}
-                  >
-                    {step.kicker}
-                  </h3>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Right Column: SCROLL-MASKED CONTENT CARDS (Slides vertically inside fixed 360px viewport box) */}
-          <div className="lg:col-span-8 h-[360px] overflow-hidden relative rounded-3xl">
-            <motion.div style={{ y: cardTranslateY }} className="space-y-12">
-              {steps.map((step, idx) => (
-                <div
-                  key={step.num}
-                  className={`card-white p-8 md:p-10 h-[360px] flex flex-col justify-between border transition-all duration-500 relative overflow-hidden shrink-0 ${
-                    activeStep === idx
-                      ? "border-[#1A1A1A] shadow-card-elevated bg-white"
-                      : "border-border-subtle opacity-60 bg-canvas"
-                  }`}
-                >
-                  {/* Background Glow */}
-                  {activeStep === idx && (
-                    <div className="absolute top-0 right-0 w-80 h-80 bg-purple-50 rounded-full blur-3xl pointer-events-none" />
-                  )}
-
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[12px] font-mono font-bold uppercase tracking-wider text-coti-violet">
-                        STEP 0{step.num} • {step.badge}
-                      </span>
-                      <div className="flex items-center gap-1">
-                        {[0, 1, 2].map((dot) => (
-                          <div
-                            key={dot}
-                            className={`h-1.5 rounded-full transition-all duration-300 ${
-                              dot === idx ? "w-6 bg-coti-violet" : "w-1.5 bg-gray-200"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    <h3 className="text-[24px] md:text-[32px] font-extrabold tracking-tight text-[#1A1A1A] leading-[1.1] mb-3">
-                      {step.title}
-                    </h3>
-                    <p className="text-[14px] text-[#6B7280] leading-relaxed max-w-xl">
-                      {step.body}
-                    </p>
-                  </div>
-
-                  <div className="relative z-10 pt-4 border-t border-border-subtle flex items-center justify-between text-[12px] font-mono font-semibold text-[#1A1A1A]">
-                    <span>COTI V2 MPC Architecture</span>
-                    <span className="flex items-center gap-1 text-coti-violet">
-                      Phase 0{step.num} Active <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
+        <div className="space-y-6">
+          {steps.map((step) => {
+            const Icon = step.icon;
+            return (
+              <div
+                key={step.num}
+                className="card-white p-6 border border-border-subtle dark:border-white/10 rounded-2xl space-y-4"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-mono font-bold text-coti-violet uppercase">
+                    STEP {step.num} • {step.badge}
+                  </span>
+                  <div className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-white/10 flex items-center justify-center text-coti-violet">
+                    <Icon className="w-4 h-4" />
                   </div>
                 </div>
-              ))}
-            </motion.div>
-          </div>
+
+                <h3 className="text-[20px] font-bold text-[#1A1A1A] dark:text-white leading-snug">
+                  {step.title}
+                </h3>
+
+                <p className="text-[13px] text-[#6B7280] dark:text-gray-300 leading-relaxed">
+                  {step.body}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </div>
+    </>
   );
 };
