@@ -4,6 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 import { AppHeader } from "@/components/AppHeader";
 import { BentoGateway } from "@/components/BentoGateway";
+import { StatusCard } from "@/components/StatusCard";
+import { ExecutionPanel } from "@/components/ExecutionPanel";
 import { PolicyModal } from "@/components/PolicyModal";
 import { PartnerFooter } from "@/components/PartnerFooter";
 import { VaultConfig, HeartbeatStatus } from "@/lib/types";
@@ -15,10 +17,10 @@ import {
   sendHeartbeat,
   deployVault,
 } from "@/lib/cotiService";
-import { CheckCircle2, AlertTriangle, Zap, Lock, Shield, ArrowRight, RefreshCw, AlertCircle } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Zap, Shield, ArrowRight, RefreshCw, AlertCircle } from "lucide-react";
 
 export default function VaultApp() {
-  const { isConnected, address } = useAccount();
+  const { isConnected } = useAccount();
   const publicClient = usePublicClient();
   const { data: walletClient } = useWalletClient();
 
@@ -83,7 +85,7 @@ export default function VaultApp() {
           type: "success",
         });
       } else {
-        await new Promise((r) => setTimeout(r, 1200));
+        await new Promise((r) => setTimeout(r, 1000));
         const mockUpdated = {
           ...vault,
           lastSeenTimestamp: Math.floor(Date.now() / 1000),
@@ -174,7 +176,7 @@ export default function VaultApp() {
       {/* Mode Banner */}
       {!isLive && (
         <div className="w-full bg-amber-50 border-b border-amber-200 text-center py-1.5 text-[12px] font-mono text-amber-700">
-          ⚡ Sanctuary Vault Application — Interactive Preview Mode (COTI V2 Devnet Ready)
+          ⚡ Sanctuary Vault Application — Decoupled Zero-Latency Hybrid Mode (COTI V2 Testnet Ready)
         </div>
       )}
 
@@ -206,7 +208,7 @@ export default function VaultApp() {
             </h1>
 
             <p className="text-[14px] text-[#6B7280] leading-relaxed">
-              Your autonomous dead-man's switch is active on COTI V2. Send a heartbeat signal before the check-in timer + grace period expires to reset execution countdown.
+              Your autonomous dead-man&apos;s switch is active on COTI V2. Send a heartbeat signal before the check-in timer + grace period expires to reset execution countdown.
             </p>
 
             <div className="flex items-center gap-4 text-[12px] font-mono text-[#6B7280] pt-2">
@@ -251,7 +253,15 @@ export default function VaultApp() {
         </div>
       </section>
 
-      {/* Bento Vault Status & Keeper Trigger Controls */}
+      {/* Dedicated StatusCard & ExecutionPanel Grid */}
+      <section className="w-full max-w-7xl mx-auto px-6 md:px-10 pb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <StatusCard vault={vault} onHeartbeatSent={handleSendHeartbeat} />
+          <ExecutionPanel vault={vault} />
+        </div>
+      </section>
+
+      {/* Bento Gateway Section */}
       <BentoGateway
         vault={vault}
         status={status}
