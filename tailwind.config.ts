@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,10 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: {
-          DEFAULT: "#F5F5F7",
-          dark: "#08080A",
-        },
+        canvas: "#F5F5F7",
         coti: {
           violet: "#8B5CF6",
           "violet-light": "#C4B5FD",
@@ -24,7 +20,6 @@ const config: Config = {
         },
         border: {
           subtle: "rgba(0, 0, 0, 0.06)",
-          dark: "rgba(255, 255, 255, 0.12)",
         },
       },
       fontFamily: {
@@ -37,10 +32,6 @@ const config: Config = {
         "card-hover": "0 20px 48px -12px rgba(0, 0, 0, 0.08)",
         "btn-black": "0 8px 20px -4px rgba(0, 0, 0, 0.25)",
         "btn-black-hover": "0 12px 28px -6px rgba(0, 0, 0, 0.35)",
-        "dark-card": "0 20px 50px -10px rgba(0, 0, 0, 0.5)",
-      },
-      screens: {
-        xs: "475px",
       },
     },
   },
