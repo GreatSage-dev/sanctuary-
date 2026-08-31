@@ -36,21 +36,21 @@ export const ScrollJourney: React.FC = () => {
 
   return (
     <section id="how-it-works" className="w-full max-w-7xl mx-auto px-6 md:px-10 py-16">
-      <div className="section-divider mb-16" />
+      <div className="section-divider mb-16 opacity-20" />
 
       {/* Section Header */}
       <div className="text-center mb-16">
-        <p className="text-[12px] font-mono font-bold uppercase tracking-widest text-[#6B7280]">
+        <p className="text-[12px] font-mono font-bold uppercase tracking-widest text-purple-300">
           THE SANCTUARY JOURNEY
         </p>
-        <h2 className="text-[32px] md:text-[46px] font-extrabold tracking-tighter leading-[1.05] text-[#1A1A1A] mt-1">
+        <h2 className="text-[32px] md:text-[46px] font-extrabold tracking-tighter leading-[1.05] text-white mt-1">
           How Sanctuary Secures Your Legacy
         </h2>
       </div>
 
       {/* ── Scroll-Pinned Parent Grid Container ── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative">
-        {/* Left Column: STICKY PINNED STEP PILLS (Pins in viewport matching screenshot) */}
+        {/* Left Column: STICKY PINNED STEP PILLS (Dark Glassmorphic Style) */}
         <div className="lg:col-span-4 lg:sticky lg:top-28 z-20 space-y-3">
           {steps.map((step, idx) => {
             const isActive = activeStep === idx;
@@ -67,26 +67,26 @@ export const ScrollJourney: React.FC = () => {
                 }}
                 className={`p-5 rounded-2xl border cursor-pointer transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] relative overflow-hidden ${
                   isActive
-                    ? "bg-white border-[#1A1A1A] shadow-card-hover -translate-y-0.5"
-                    : "bg-canvas border-border-subtle hover:border-[#D1D5DB] opacity-70"
+                    ? "glass-card border-purple-500/50 bg-white/[0.08] shadow-2xl -translate-y-0.5"
+                    : "bg-white/[0.02] border-white/10 hover:border-white/20 opacity-60"
                 }`}
               >
                 {/* Active Indicator Bar */}
                 {isActive && (
                   <motion.div
                     layoutId="activePillIndicator"
-                    className="absolute left-0 top-0 bottom-0 w-1 bg-[#1A1A1A]"
+                    className="absolute left-0 top-0 bottom-0 w-1 bg-purple-400"
                     transition={{ duration: 0.3 }}
                   />
                 )}
 
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-coti-violet">
+                  <span className="text-[11px] font-mono font-bold uppercase text-purple-300">
                     0{step.num} — {step.badge}
                   </span>
                   <div
                     className={`w-6 h-6 rounded-lg flex items-center justify-center transition-colors ${
-                      isActive ? "bg-[#1A1A1A] text-white" : "bg-gray-200 text-[#6B7280]"
+                      isActive ? "bg-purple-600 text-white" : "bg-white/10 text-gray-400"
                     }`}
                   >
                     <Icon className="w-3.5 h-3.5" />
@@ -94,7 +94,7 @@ export const ScrollJourney: React.FC = () => {
                 </div>
                 <h3
                   className={`text-[15px] font-bold tracking-tight ${
-                    isActive ? "text-[#1A1A1A]" : "text-[#6B7280]"
+                    isActive ? "text-white" : "text-gray-400"
                   }`}
                 >
                   {step.kicker}
@@ -104,7 +104,7 @@ export const ScrollJourney: React.FC = () => {
           })}
         </div>
 
-        {/* Right Column: SCROLLING STEP CONTENT CARDS (Scrolls naturally past the pinned left column) */}
+        {/* Right Column: SCROLLING STEP CONTENT CARDS */}
         <div className="lg:col-span-8 space-y-16 py-1">
           {steps.map((step, idx) => (
             <motion.div
@@ -115,20 +115,20 @@ export const ScrollJourney: React.FC = () => {
               initial={{ opacity: 0.5, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className={`card-white p-8 md:p-12 min-h-[320px] flex flex-col justify-between border transition-all duration-500 relative overflow-hidden ${
+              className={`glass-card p-8 md:p-12 min-h-[320px] flex flex-col justify-between border transition-all duration-500 relative overflow-hidden ${
                 activeStep === idx
-                  ? "border-[#1A1A1A] shadow-card-elevated bg-white"
-                  : "border-border-subtle opacity-70 bg-canvas"
+                  ? "border-purple-500/40 bg-white/[0.06] shadow-2xl"
+                  : "border-white/10 opacity-60 bg-white/[0.02]"
               }`}
             >
-              {/* Background Glow for Active Card */}
+              {/* Background Glow */}
               {activeStep === idx && (
-                <div className="absolute top-0 right-0 w-80 h-80 bg-purple-50 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
               )}
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[12px] font-mono font-bold uppercase tracking-wider text-coti-violet">
+                  <span className="text-[12px] font-mono font-bold uppercase tracking-wider text-purple-300">
                     STEP 0{step.num} • {step.badge}
                   </span>
                   <div className="flex items-center gap-1">
@@ -136,24 +136,24 @@ export const ScrollJourney: React.FC = () => {
                       <div
                         key={dot}
                         className={`h-1.5 rounded-full transition-all duration-300 ${
-                          dot === idx ? "w-6 bg-coti-violet" : "w-1.5 bg-gray-200"
+                          dot === idx ? "w-6 bg-purple-400" : "w-1.5 bg-white/20"
                         }`}
                       />
                     ))}
                   </div>
                 </div>
 
-                <h3 className="text-[26px] md:text-[34px] font-extrabold tracking-tight text-[#1A1A1A] leading-[1.1] mb-4">
+                <h3 className="text-[26px] md:text-[34px] font-extrabold tracking-tight text-white leading-[1.1] mb-4">
                   {step.title}
                 </h3>
-                <p className="text-[15px] text-[#6B7280] leading-relaxed max-w-xl">
+                <p className="text-[15px] text-gray-300 leading-relaxed max-w-xl">
                   {step.body}
                 </p>
               </div>
 
-              <div className="relative z-10 pt-6 border-t border-border-subtle flex items-center justify-between text-[12px] font-mono font-semibold text-[#1A1A1A]">
+              <div className="relative z-10 pt-6 border-t border-white/10 flex items-center justify-between text-[12px] font-mono font-semibold text-white">
                 <span>COTI V2 MPC Architecture</span>
-                <span className="flex items-center gap-1 text-coti-violet">
+                <span className="flex items-center gap-1 text-purple-300">
                   Phase 0{step.num} Active <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>

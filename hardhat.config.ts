@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const DEPLOYER_KEY = process.env.DEPLOYER_PRIVATE_KEY || "";
-const COTI_RPC = process.env.COTI_RPC_URL || "https://devnet.coti.io/rpc";
+const COTI_RPC = process.env.COTI_RPC_URL || "https://testnet.coti.io/rpc";
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -20,9 +20,9 @@ const config: HardhatUserConfig = {
   },
   networks: {
     hardhat: {},
-    "coti-devnet": {
+    "coti-testnet": {
       url: COTI_RPC,
-      chainId: 13068200,
+      chainId: 7082400,
       accounts: DEPLOYER_KEY ? [DEPLOYER_KEY] : [],
     },
   },

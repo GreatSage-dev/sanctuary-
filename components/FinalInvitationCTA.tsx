@@ -13,29 +13,29 @@ export const FinalInvitationCTA: React.FC = () => {
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="card-white p-10 md:p-16 text-center flex flex-col items-center justify-center relative overflow-hidden shadow-card-elevated border border-border-subtle"
+        className="glass-card p-10 md:p-16 text-center flex flex-col items-center justify-center relative overflow-hidden shadow-2xl border border-white/10"
       >
-        {/* Background Accent */}
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-50/60 via-canvas/40 to-white pointer-events-none" />
+        {/* Background Radial Glow */}
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-[#08080A] pointer-events-none" />
 
         {/* Shield Icon Mark */}
         <motion.div
           animate={{ y: [0, -6, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="w-14 h-14 rounded-2xl bg-[#1A1A1A] text-white flex items-center justify-center mb-6 shadow-btn-black z-10"
+          className="w-14 h-14 rounded-2xl bg-white/10 text-white flex items-center justify-center mb-6 shadow-2xl border border-white/15 z-10"
         >
-          <Shield className="w-7 h-7 text-coti-emerald" />
+          <Shield className="w-7 h-7 text-emerald-400" />
         </motion.div>
 
-        <span className="text-[12px] font-mono font-bold uppercase tracking-widest text-coti-violet mb-3 z-10">
+        <span className="text-[12px] font-mono font-bold uppercase tracking-widest text-purple-300 mb-3 z-10">
           BECOME PROTECTED
         </span>
 
-        <h2 className="text-[34px] md:text-[52px] font-extrabold tracking-tighter leading-[1.04] text-[#1A1A1A] max-w-2xl z-10">
+        <h2 className="text-[34px] md:text-[52px] font-extrabold tracking-tighter leading-[1.04] text-white max-w-2xl z-10">
           If your assets and legacy matter, start with Sanctuary.
         </h2>
 
-        <p className="text-[15px] md:text-[17px] text-[#6B7280] leading-relaxed max-w-lg mt-4 z-10">
+        <p className="text-[15px] md:text-[17px] text-gray-300 leading-relaxed max-w-lg mt-4 z-10">
           Configure your encrypted dead-man's switch on COTI V2. 100% confidential beneficiaries, zero-knowledge keeper execution.
         </p>
 
@@ -46,14 +46,14 @@ export const FinalInvitationCTA: React.FC = () => {
         >
           <Link
             href="/vault"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#1A1A1A] hover:bg-[#2D2D2D] text-white text-[14px] font-bold transition-all duration-300 shadow-btn-black hover:shadow-btn-black-hover"
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-[#08080A] text-[14px] font-bold transition-all duration-300 shadow-xl hover:bg-gray-100"
           >
             <span>Launch Sanctuary Vault</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
 
-        <div className="mt-8 pt-6 border-t border-border-subtle w-full max-w-md flex items-center justify-center gap-6 text-[12px] font-mono text-[#6B7280] z-10">
+        <div className="mt-8 pt-6 border-t border-white/10 w-full max-w-md flex items-center justify-center gap-6 text-[12px] font-mono text-gray-400 z-10">
           <span>COTI V2 Devnet</span>
           <span>•</span>
           <span>100% Non-Custodial</span>

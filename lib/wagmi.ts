@@ -3,10 +3,10 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { type Chain } from "viem";
 
-// ── COTI V2 Devnet Chain Definition ──
-export const cotiDevnet: Chain = {
-  id: 13068200,
-  name: "COTI V2 Devnet",
+// ── Official COTI V2 Testnet Chain Definition ──
+export const cotiTestnet: Chain = {
+  id: 7082400,
+  name: "COTI V2 Testnet",
   nativeCurrency: {
     decimals: 18,
     name: "COTI",
@@ -14,13 +14,13 @@ export const cotiDevnet: Chain = {
   },
   rpcUrls: {
     default: {
-      http: ["https://devnet.coti.io/rpc"],
+      http: ["https://testnet.coti.io/rpc"],
     },
   },
   blockExplorers: {
     default: {
-      name: "COTI Explorer",
-      url: "https://explorer-devnet.coti.io",
+      name: "COTI Scan",
+      url: "https://testnet.cotiscan.io",
     },
   },
   testnet: true,
@@ -29,7 +29,7 @@ export const cotiDevnet: Chain = {
 // ── Wagmi + RainbowKit Config ──
 export const wagmiConfig = getDefaultConfig({
   appName: "Sanctuary",
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "PLACEHOLDER_PROJECT_ID",
-  chains: [cotiDevnet],
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "3a64810435d24b61ef2d0b59a3ec0150",
+  chains: [cotiTestnet],
   ssr: true,
 });

@@ -14,6 +14,8 @@ export const CONTRACT_ADDRESS: Address =
   (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as Address) ||
   "0x0000000000000000000000000000000000000000";
 
+export const COTI_TESTNET_CHAIN_ID = 7082400;
+
 export const MOCK_VAULT_STATE: VaultConfig = {
   checkInIntervalHours: 24,
   gracePeriodHours: 24,
