@@ -8,7 +8,10 @@ import {
   AlertTriangle,
   CheckCircle2,
   Play,
-  ArrowRight,
+  Shield,
+  Lock,
+  Key,
+  Zap,
 } from "lucide-react";
 import { usePublicClient, useWalletClient } from "wagmi";
 import { VaultConfig, HeartbeatStatus } from "@/lib/types";
@@ -36,39 +39,100 @@ const GarbledRingSVG = () => (
   </svg>
 );
 
-/* ── Custom SVG: 3D Abstract Organic Blob (for right cards) ── */
-const AbstractBlobSVG = ({ variant }: { variant: "top" | "bottom" }) => (
-  <svg width="180" height="120" viewBox="0 0 240 160" fill="none">
-    <defs>
-      <linearGradient id={`blob-${variant}`} x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor={variant === "top" ? "#C4B5FD" : "#A78BFA"} />
-        <stop offset="100%" stopColor={variant === "top" ? "#8B5CF6" : "#6D28D9"} />
-      </linearGradient>
-    </defs>
-    {variant === "top" ? (
-      <>
-        <path d="M60 130 Q80 40 140 60 Q200 80 180 130 Q160 160 100 150 Z" fill={`url(#blob-${variant})`} opacity="0.8" />
-        <path d="M80 110 Q100 50 150 70 Q190 85 170 120 Z" fill="white" opacity="0.15" />
-        <ellipse cx="130" cy="50" rx="30" ry="15" fill="#DDD6FE" opacity="0.4" />
-      </>
-    ) : (
-      <>
-        <path d="M40 80 Q60 20 120 40 Q180 60 200 120 Q180 150 120 140 Q60 130 40 80Z" fill={`url(#blob-${variant})`} opacity="0.85" />
-        {[0, 1, 2, 3, 4].map((i) => (
-          <ellipse
-            key={i}
-            cx={120 + Math.cos((i * 72 * Math.PI) / 180) * 40}
-            cy={90 + Math.sin((i * 72 * Math.PI) / 180) * 40}
-            rx="18"
-            ry="8"
-            fill="#C4B5FD"
-            opacity="0.6"
-            transform={`rotate(${i * 72} ${120 + Math.cos((i * 72 * Math.PI) / 180) * 40} ${90 + Math.sin((i * 72 * Math.PI) / 180) * 40})`}
-          />
-        ))}
-      </>
-    )}
-  </svg>
+/* ── PREMIUM ILLUSTRATION 1: Heartbeat Pulse & Liveness Radar ── */
+const HeartbeatPulseGraphic = () => (
+  <div className="relative w-full h-[140px] flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-purple-50/80 to-purple-100/30 border border-purple-100/60 p-4">
+    <svg width="220" height="100" viewBox="0 0 220 100" fill="none" className="z-10">
+      <defs>
+        <linearGradient id="pulseLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#C4B5FD" stopOpacity="0.2" />
+          <stop offset="40%" stopColor="#8B5CF6" />
+          <stop offset="60%" stopColor="#10B981" />
+          <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.3" />
+        </linearGradient>
+        <radialGradient id="pulseGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#10B981" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#10B981" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Grid background lines */}
+      <line x1="0" y1="25" x2="220" y2="25" stroke="#8B5CF6" strokeWidth="0.5" opacity="0.1" />
+      <line x1="0" y1="50" x2="220" y2="50" stroke="#8B5CF6" strokeWidth="0.5" opacity="0.15" />
+      <line x1="0" y1="75" x2="220" y2="75" stroke="#8B5CF6" strokeWidth="0.5" opacity="0.1" />
+
+      {/* Heartbeat EKG Pulse Waveform */}
+      <path
+        d="M 10 50 L 50 50 L 60 40 L 70 65 L 85 15 L 100 85 L 115 35 L 125 55 L 135 50 L 210 50"
+        stroke="url(#pulseLineGrad)"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* Live Glowing Pulse Indicator */}
+      <circle cx="100" cy="85" r="14" fill="url(#pulseGlow)" />
+      <circle cx="100" cy="85" r="5" fill="#10B981" />
+
+      {/* Frequency Labels */}
+      <text x="15" y="20" fill="#6B7280" fontSize="8" fontFamily="monospace" fontWeight="bold">LIVENESS WAVE</text>
+      <text x="165" y="20" fill="#10B981" fontSize="8" fontFamily="monospace" fontWeight="bold">100% PING SAFE</text>
+    </svg>
+
+    {/* Subtle pulsing background glow */}
+    <div className="absolute inset-0 bg-radial from-purple-200/30 to-transparent pointer-events-none" />
+  </div>
+);
+
+/* ── PREMIUM ILLUSTRATION 2: Keeper Enclave Key Release Mechanism ── */
+const KeeperEnclaveGraphic = () => (
+  <div className="relative w-full h-[140px] flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-purple-50/80 to-purple-100/30 border border-purple-100/60 p-4">
+    <svg width="220" height="100" viewBox="0 0 220 100" fill="none" className="z-10">
+      <defs>
+        <linearGradient id="keyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#C4B5FD" />
+          <stop offset="100%" stopColor="#7C3AED" />
+        </linearGradient>
+        <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#6D28D9" stopOpacity="0.05" />
+        </linearGradient>
+      </defs>
+
+      {/* Outer Enclave Shield Boundary */}
+      <path
+        d="M 110 15 L 160 30 V 60 C 160 80 140 93 110 98 C 80 93 60 80 60 60 V 30 Z"
+        fill="url(#shieldGrad)"
+        stroke="#8B5CF6"
+        strokeWidth="1.5"
+        strokeDasharray="4 3"
+      />
+
+      {/* Center Lock / Key Emblem */}
+      <rect x="96" y="42" width="28" height="24" rx="6" fill="#0D0E12" stroke="#A78BFA" strokeWidth="2" />
+      <path d="M 104 42 V 34 C 104 29 116 29 116 34 V 42" stroke="#C4B5FD" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <circle cx="110" cy="52" r="3" fill="#10B981" />
+      <path d="M 110 55 V 60" stroke="#10B981" strokeWidth="2" strokeLinecap="round" />
+
+      {/* Orbiting MPC Keeper Nodes */}
+      <circle cx="45" cy="50" r="10" fill="#F3E8FF" stroke="#8B5CF6" strokeWidth="1.5" />
+      <path d="M 41 50 L 49 50 M 45 46 L 45 54" stroke="#8B5CF6" strokeWidth="1.5" />
+
+      <circle cx="175" cy="50" r="10" fill="#F3E8FF" stroke="#8B5CF6" strokeWidth="1.5" />
+      <path d="M 171 50 L 179 50 M 175 46 L 175 54" stroke="#8B5CF6" strokeWidth="1.5" />
+
+      {/* Connection Dash Lines */}
+      <line x1="55" y1="50" x2="96" y2="52" stroke="#8B5CF6" strokeWidth="1" strokeDasharray="3 3" />
+      <line x1="124" y1="52" x2="165" y2="50" stroke="#8B5CF6" strokeWidth="1" strokeDasharray="3 3" />
+
+      {/* Labels */}
+      <text x="15" y="90" fill="#6B7280" fontSize="8" fontFamily="monospace" fontWeight="bold">COTI MPC ENCLAVE</text>
+      <text x="150" y="90" fill="#8B5CF6" fontSize="8" fontFamily="monospace" fontWeight="bold">1% BOUNTY</text>
+    </svg>
+
+    {/* Glow backdrop */}
+    <div className="absolute inset-0 bg-radial from-purple-200/30 to-transparent pointer-events-none" />
+  </div>
 );
 
 export const BentoGateway: React.FC<BentoGatewayProps> = ({
@@ -100,7 +164,6 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
             txHash: res.txHash,
           });
         } else {
-          // Mock fallback for preview mode
           await new Promise((r) => setTimeout(r, 1500));
           setKeeperResult({
             success: false,
@@ -126,14 +189,14 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
       {/* Section divider */}
       <div className="section-divider mb-16" />
 
-      {/* Big Centered Section Title (matches reference "The Gateway to Solana-AI") */}
+      {/* Big Centered Section Title */}
       <div className="text-center mb-12">
         <h2 className="text-[32px] md:text-[48px] font-extrabold tracking-tighter leading-[1.05] text-[#1A1A1A]">
           The Gateway to<br />Confidential Automation
         </h2>
       </div>
 
-      {/* Bento Grid (1:1 reference layout: left dark 7col, right white 5col stacked) */}
+      {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* ── Left: Large Dark Obsidian Card (7 cols) ── */}
         <div className="lg:col-span-7 card-obsidian p-7 md:p-9 flex flex-col justify-between min-h-[480px]">
@@ -202,16 +265,16 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
         <div className="lg:col-span-5 flex flex-col gap-5">
           {/* Right Top White Card: Heartbeat Monitor */}
           <div className="card-white p-6 flex flex-col justify-between relative overflow-hidden flex-1">
-            {/* Small tag icon (matches reference "tc" tiny icons top-right) */}
-            <div className="flex items-center justify-end mb-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-25">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-coti-violet">
+                LIVENESS RHYTHM
+              </span>
+              <Activity className="w-4 h-4 text-[#6B7280]" />
             </div>
 
-            {/* 3D Blob Graphic (matches reference purple 3D abstract images in right cards) */}
-            <div className="flex justify-center mb-4">
-              <AbstractBlobSVG variant="top" />
+            {/* Premium Heartbeat Waveform Illustration */}
+            <div className="my-3">
+              <HeartbeatPulseGraphic />
             </div>
 
             <div>
@@ -232,17 +295,16 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
 
           {/* Right Bottom White Card: Keeper Network */}
           <div className="card-white p-6 flex flex-col justify-between flex-1">
-            {/* Small tag icon */}
-            <div className="flex items-center justify-end mb-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-25">
-                <circle cx="12" cy="12" r="10" stroke="#1A1A1A" strokeWidth="2"/>
-                <path d="M12 6v6l4 2" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-coti-violet">
+                MPC KEEPERS
+              </span>
+              <Key className="w-4 h-4 text-[#6B7280]" />
             </div>
 
-            {/* 3D Blob Graphic */}
-            <div className="flex justify-center mb-4">
-              <AbstractBlobSVG variant="bottom" />
+            {/* Premium Keeper Enclave Key Release Illustration */}
+            <div className="my-3">
+              <KeeperEnclaveGraphic />
             </div>
 
             <div>
