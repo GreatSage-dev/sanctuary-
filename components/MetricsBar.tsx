@@ -33,24 +33,24 @@ export const MetricsBar: React.FC = () => {
 
   return (
     <section className="w-full max-w-7xl mx-auto px-6 md:px-10 py-10">
-      <div className="glass-card p-6 md:p-8 grid grid-cols-2 lg:grid-cols-4 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-white/10 border border-white/10 shadow-2xl">
+      <div className="card-white p-6 md:p-8 grid grid-cols-2 lg:grid-cols-4 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-border-subtle shadow-card-elevated">
         {metrics.map((item, idx) => {
           const Icon = item.icon;
           return (
             <div key={item.label} className={`flex flex-col justify-between ${idx !== 0 ? "pt-4 lg:pt-0 lg:pl-6" : ""}`}>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-gray-400">
+                <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#6B7280]">
                   {item.label}
                 </span>
-                <div className="w-7 h-7 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300">
+                <div className="w-7 h-7 rounded-lg bg-purple-50 border border-purple-100 flex items-center justify-center text-coti-violet">
                   <Icon className="w-3.5 h-3.5" />
                 </div>
               </div>
               <div>
-                <div className="text-[28px] md:text-[34px] font-mono font-extrabold tracking-tight text-white">
+                <div className="text-[28px] md:text-[34px] font-mono font-extrabold tracking-tight text-[#1A1A1A]">
                   {item.value}
                 </div>
-                <div className="text-[12px] text-gray-400 mt-0.5 font-medium">
+                <div className="text-[12px] text-[#6B7280] mt-0.5 font-medium">
                   {item.sub}
                 </div>
               </div>

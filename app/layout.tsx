@@ -14,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth dark">
-      <body className="bg-[#08080A] text-[#F3F4F6] font-sans antialiased selection:bg-purple-500/30 selection:text-purple-200">
+    <html lang="en" className="scroll-smooth">
+      <body className="bg-canvas text-[#1A1A1A] font-sans antialiased selection:bg-coti-violet/20 selection:text-coti-violet">
         <Web3Providers>{children}</Web3Providers>
       </body>
     </html>

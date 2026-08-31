@@ -42,14 +42,14 @@ export const PrivacyComparisonTable: React.FC = () => {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="text-center mb-10"
       >
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-[12px] font-mono font-bold mb-3">
-          <Shield className="w-3.5 h-3.5 text-purple-400" />
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 text-coti-violet text-[12px] font-mono font-bold mb-3">
+          <Shield className="w-3.5 h-3.5 text-coti-violet" />
           WHY COTI V2 MATTERS
         </span>
-        <h2 className="text-[30px] md:text-[44px] font-extrabold tracking-tighter leading-[1.05] text-white">
+        <h2 className="text-[30px] md:text-[44px] font-extrabold tracking-tighter leading-[1.05] text-[#1A1A1A]">
           Transparent EVM vs COTI V2 Garbled Circuits
         </h2>
-        <p className="text-[14px] text-gray-400 mt-2 max-w-xl mx-auto">
+        <p className="text-[14px] text-[#6B7280] mt-2 max-w-xl mx-auto">
           Standard dead-man switches leak your beneficiary's address and fund size to the entire world. Sanctuary uses COTI V2 Multi-Party Computation to achieve complete privacy.
         </p>
       </motion.div>
@@ -59,32 +59,32 @@ export const PrivacyComparisonTable: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="glass-card overflow-hidden border border-white/10 shadow-2xl"
+        className="card-white overflow-hidden border border-border-subtle shadow-card-elevated"
       >
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-white/[0.03] border-b border-white/10 text-[12px] font-mono font-bold uppercase text-gray-400">
+              <tr className="bg-canvas border-b border-border-subtle text-[12px] font-mono font-bold uppercase text-[#6B7280]">
                 <th className="py-4 px-6">Security & Privacy Dimension</th>
-                <th className="py-4 px-6 text-red-400">Standard Transparent EVM</th>
-                <th className="py-4 px-6 text-purple-300 bg-purple-500/10">Sanctuary on COTI V2</th>
+                <th className="py-4 px-6 text-red-600">Standard Transparent EVM</th>
+                <th className="py-4 px-6 text-coti-violet bg-purple-50/50">Sanctuary on COTI V2</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/10 text-[13px]">
+            <tbody className="divide-y divide-border-subtle text-[13px]">
               {comparisonRows.map((row) => (
-                <tr key={row.feature} className="hover:bg-white/[0.02] transition-colors">
-                  <td className="py-4 px-6 font-semibold text-white">
+                <tr key={row.feature} className="hover:bg-canvas/50 transition-colors">
+                  <td className="py-4 px-6 font-semibold text-[#1A1A1A]">
                     {row.feature}
                   </td>
-                  <td className="py-4 px-6 text-gray-400 font-mono text-[12px]">
+                  <td className="py-4 px-6 text-[#6B7280] font-mono text-[12px]">
                     <div className="flex items-center gap-2">
-                      <X className="w-4 h-4 text-red-400 shrink-0" />
+                      <X className="w-4 h-4 text-red-500 shrink-0" />
                       <span>{row.standardEVM}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-6 text-purple-200 font-mono text-[12px] bg-purple-500/5 font-bold">
-                    <div className="flex items-center gap-2 text-purple-300">
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <td className="py-4 px-6 text-coti-violet font-mono text-[12px] bg-purple-50/30 font-bold">
+                    <div className="flex items-center gap-2 text-coti-violet">
+                      <Check className="w-4 h-4 text-coti-emerald shrink-0" />
                       <span>{row.cotiGarbled}</span>
                     </div>
                   </td>

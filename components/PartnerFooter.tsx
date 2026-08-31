@@ -7,10 +7,10 @@ export const PartnerFooter: React.FC = () => {
 
   return (
     <footer className="w-full max-w-7xl mx-auto px-6 md:px-10 pt-10 pb-12">
-      <div className="section-divider mb-8 opacity-20" />
+      <div className="section-divider mb-8" />
 
       <div className="text-center mb-6">
-        <span className="text-[12px] text-gray-400 font-medium tracking-wider font-mono uppercase">
+        <span className="text-[12px] text-[#6B7280] font-medium tracking-wider font-mono uppercase">
           Ecosystem Partners
         </span>
       </div>
@@ -19,7 +19,7 @@ export const PartnerFooter: React.FC = () => {
         {partners.map((name) => (
           <span
             key={name}
-            className="text-[14px] md:text-[16px] font-extrabold tracking-tight text-white opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer font-mono"
+            className="text-[14px] md:text-[16px] font-extrabold tracking-tight text-[#1A1A1A] opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer font-mono"
           >
             {name}
           </span>

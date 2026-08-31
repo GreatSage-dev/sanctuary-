@@ -33,13 +33,13 @@ export const UseCasesGrid: React.FC = () => {
 
   return (
     <section id="use-cases" className="w-full max-w-7xl mx-auto px-6 md:px-10 py-16">
-      <div className="section-divider mb-16 opacity-20" />
+      <div className="section-divider mb-16" />
 
       <div className="text-center mb-12">
-        <span className="text-[12px] font-mono font-bold uppercase tracking-widest text-purple-300">
+        <span className="text-[12px] font-mono font-bold uppercase tracking-widest text-[#6B7280]">
           WEB3 APPLICATIONS
         </span>
-        <h2 className="text-[32px] md:text-[44px] font-extrabold tracking-tighter leading-[1.05] text-white mt-1">
+        <h2 className="text-[32px] md:text-[44px] font-extrabold tracking-tighter leading-[1.05] text-[#1A1A1A] mt-1">
           Built for Mission-Critical Privacy
         </h2>
       </div>
@@ -48,22 +48,22 @@ export const UseCasesGrid: React.FC = () => {
         {useCases.map((uc) => {
           const Icon = uc.icon;
           return (
-            <div key={uc.title} className="glass-card p-8 flex flex-col justify-between border border-white/10 group">
+            <div key={uc.title} className="card-white p-8 flex flex-col justify-between border border-border-subtle group hover:border-[#1A1A1A] transition-all duration-300">
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300">
+                  <div className="w-10 h-10 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-coti-violet">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[11px] font-mono font-semibold text-gray-400">
+                  <span className="px-3 py-1 rounded-full bg-canvas border border-border-subtle text-[11px] font-mono font-semibold text-[#6B7280]">
                     {uc.tag}
                   </span>
                 </div>
 
-                <h3 className="text-[20px] font-bold tracking-tight text-white mb-2">
+                <h3 className="text-[20px] font-bold tracking-tight text-[#1A1A1A] mb-2">
                   {uc.title}
                 </h3>
 
-                <p className="text-[14px] text-gray-400 leading-relaxed">
+                <p className="text-[14px] text-[#6B7280] leading-relaxed">
                   {uc.desc}
                 </p>
               </div>

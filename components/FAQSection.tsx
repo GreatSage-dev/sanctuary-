@@ -25,20 +25,20 @@ export const FAQSection: React.FC = () => {
     },
     {
       q: "Which networks are supported?",
-      a: "Sanctuary is deployed on COTI V2 Devnet / Testnet (Chain ID 13068200) and is designed for full EVM compatibility.",
+      a: "Sanctuary is deployed on COTI V2 Testnet (Chain ID 7082400) and is designed for full EVM compatibility.",
     },
   ];
 
   return (
     <section id="faq" className="w-full max-w-7xl mx-auto px-6 md:px-10 py-16">
-      <div className="section-divider mb-16 opacity-20" />
+      <div className="section-divider mb-16" />
 
       <div className="text-center mb-12">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-[12px] font-mono font-bold mb-3">
-          <HelpCircle className="w-3.5 h-3.5 text-purple-400" />
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 text-coti-violet text-[12px] font-mono font-bold mb-3">
+          <HelpCircle className="w-3.5 h-3.5 text-coti-violet" />
           FREQUENTLY ASKED QUESTIONS
         </span>
-        <h2 className="text-[32px] md:text-[44px] font-extrabold tracking-tighter text-white">
+        <h2 className="text-[32px] md:text-[44px] font-extrabold tracking-tighter text-[#1A1A1A]">
           Protocol FAQ & Deep Dive
         </h2>
       </div>
@@ -49,21 +49,21 @@ export const FAQSection: React.FC = () => {
           return (
             <div
               key={faq.q}
-              className="glass-card overflow-hidden transition-all duration-300 border border-white/10"
+              className="card-white overflow-hidden transition-all duration-300 border border-border-subtle"
             >
               <button
                 onClick={() => setOpenIndex(isOpen ? null : idx)}
-                className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-[16px] text-white"
+                className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-[16px] text-[#1A1A1A]"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
-                    isOpen ? "rotate-180 text-purple-400" : ""
+                  className={`w-5 h-5 text-[#6B7280] transition-transform duration-300 ${
+                    isOpen ? "rotate-180 text-coti-violet" : ""
                   }`}
                 />
               </button>
               {isOpen && (
-                <div className="px-6 pb-6 text-[14px] text-gray-300 leading-relaxed border-t border-white/10 pt-4">
+                <div className="px-6 pb-6 text-[14px] text-[#6B7280] leading-relaxed border-t border-border-subtle pt-4">
                   {faq.a}
                 </div>
               )}
