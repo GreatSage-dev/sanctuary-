@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "compile": "hardhat compile",
-    "deploy:devnet": "hardhat run scripts/deploy.ts --network coti-devnet",
+    "deploy:testnet": "hardhat run scripts/deploy.ts --network coti-testnet",
     "deploy:local": "hardhat run scripts/deploy.ts --network hardhat"
   },
   "dependencies": {
