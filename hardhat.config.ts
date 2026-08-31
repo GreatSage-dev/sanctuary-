@@ -1,0 +1,37 @@
+import { HardhatUserConfig } from "hardhat/config";
+import "@nomicfoundation/hardhat-toolbox";
+import * as dotenv from "dotenv";
+
+dotenv.config();
+
+const DEPLOYER_KEY = process.env.DEPLOYER_PRIVATE_KEY || "";
+const COTI_RPC = process.env.COTI_RPC_URL || "https://devnet.coti.io/rpc";
+
+const config: HardhatUserConfig = {
+  solidity: {
+    version: "0.8.24",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+      evmVersion: "paris",
+    },
+  },
+  networks: {
+    hardhat: {},
+    "coti-devnet": {
+      url: COTI_RPC,
+      chainId: 13068200,
+      accounts: DEPLOYER_KEY ? [DEPLOYER_KEY] : [],
+    },
+  },
+  paths: {
+    sources: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts",
+  },
+};
+
+export default config;
