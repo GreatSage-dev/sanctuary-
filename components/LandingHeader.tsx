@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Shield, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
+import { SanctuaryLogoMark } from "./SanctuaryLogoMark";
 
 export const LandingHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,12 +13,10 @@ export const LandingHeader: React.FC = () => {
   return (
     <header className="sticky top-4 sm:top-6 z-50 w-full px-4 sm:px-6 max-w-5xl mx-auto">
       <div className="glass-pill-light px-4 sm:px-6 py-3 flex items-center justify-between shadow-card-rest border border-white/80 bg-white/75 backdrop-blur-xl">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 cursor-pointer">
-          <div className="w-7 h-7 rounded-lg bg-canvas flex items-center justify-center border border-border-subtle text-coti-violet">
-            <Shield className="w-4 h-4" />
-          </div>
-          <span className="font-extrabold text-[14px] sm:text-[15px] tracking-[-0.03em] text-[#1A1A1A]">
+        {/* Brand Logo with Custom 3D Shield Keyhole Mark */}
+        <Link href="/" className="flex items-center gap-2.5 cursor-pointer group">
+          <SanctuaryLogoMark size="sm" showBlocks={false} />
+          <span className="font-extrabold text-[15px] tracking-[-0.03em] text-[#1A1A1A] group-hover:text-coti-violet transition-colors">
             SANCTUARY
           </span>
         </Link>

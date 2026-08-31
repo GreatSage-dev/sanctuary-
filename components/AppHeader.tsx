@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Shield, Settings } from "lucide-react";
+import { Settings } from "lucide-react";
+import { SanctuaryLogoMark } from "./SanctuaryLogoMark";
 
 interface AppHeaderProps {
   onOpenPolicyModal: () => void;
@@ -13,13 +14,11 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ onOpenPolicyModal }) => {
   return (
     <header className="sticky top-4 z-50 w-full px-4 sm:px-6 max-w-7xl mx-auto">
       <div className="glass-pill-light px-4 sm:px-8 py-3 flex items-center justify-between shadow-card-rest border border-white/80 bg-white/75 backdrop-blur-xl">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 cursor-pointer">
-          <div className="w-8 h-8 rounded-xl bg-[#1A1A1A] text-white flex items-center justify-center font-bold shadow-md">
-            <Shield className="w-4 h-4 text-coti-emerald" />
-          </div>
+        {/* Brand Logo with Custom 3D Shield Keyhole Mark */}
+        <Link href="/" className="flex items-center gap-2.5 cursor-pointer group">
+          <SanctuaryLogoMark size="sm" showBlocks={false} />
           <div className="flex flex-col">
-            <span className="font-extrabold text-[15px] tracking-tight text-[#1A1A1A] leading-none">
+            <span className="font-extrabold text-[15px] tracking-tight text-[#1A1A1A] group-hover:text-coti-violet transition-colors leading-none">
               SANCTUARY
             </span>
             <span className="text-[9px] font-mono text-coti-violet font-semibold tracking-widest uppercase mt-0.5">

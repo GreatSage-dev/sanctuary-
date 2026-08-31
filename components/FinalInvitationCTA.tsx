@@ -3,7 +3,8 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Shield } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { SanctuaryLogoMark } from "./SanctuaryLogoMark";
 
 /* Floating background particles */
 const FloatingDots = () => {
@@ -62,7 +63,7 @@ const SonarRings = () => (
           ease: "easeOut",
           delay: i * 0.8,
         }}
-        className="absolute inset-0 rounded-2xl border-2 border-purple-300"
+        className="absolute inset-0 rounded-full border-2 border-purple-300 pointer-events-none"
       />
     ))}
   </>
@@ -99,9 +100,9 @@ export const FinalInvitationCTA: React.FC = () => {
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-16 h-16 rounded-2xl bg-[#1A1A1A] text-white flex items-center justify-center shadow-[0_12px_30px_-4px_rgba(0,0,0,0.3)]"
+            className="relative"
           >
-            <Shield className="w-7 h-7 text-coti-emerald" />
+            <SanctuaryLogoMark size="lg" showBlocks={false} />
           </motion.div>
         </div>
 

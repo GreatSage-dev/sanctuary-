@@ -13,92 +13,17 @@ import { UseCasesGrid } from "@/components/UseCasesGrid";
 import { FAQSection } from "@/components/FAQSection";
 import { FinalInvitationCTA } from "@/components/FinalInvitationCTA";
 import { PartnerFooter } from "@/components/PartnerFooter";
+import { SanctuaryLogoMark } from "@/components/SanctuaryLogoMark";
 import { ArrowRight } from "lucide-react";
 
-/* ── Central 3D Metallic Shield Primitive ── */
+/* ── Central 3D Shield Primitive ── */
 const HeroPrimitive = () => (
   <motion.div
     animate={{ y: [0, -10, 0] }}
     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
     className="relative flex items-center justify-center z-10"
   >
-    <svg
-      width="260"
-      height="260"
-      viewBox="0 0 300 300"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="drop-shadow-[0_20px_60px_rgba(139,92,246,0.35)]"
-    >
-      <defs>
-        <linearGradient id="heroGrad1" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="0%" stopColor="#C4B5FD" />
-          <stop offset="50%" stopColor="#8B5CF6" />
-          <stop offset="100%" stopColor="#6D28D9" />
-        </linearGradient>
-        <linearGradient id="heroGrad2" x1="0%" y1="50%" x2="100%" y2="50%">
-          <stop offset="0%" stopColor="#DDD6FE" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.6" />
-        </linearGradient>
-        <linearGradient id="heroShine" x1="30%" y1="0%" x2="70%" y2="100%">
-          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.7" />
-          <stop offset="40%" stopColor="#FFFFFF" stopOpacity="0.1" />
-          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
-        </linearGradient>
-        <radialGradient id="glowBg" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      <circle cx="150" cy="150" r="140" fill="url(#glowBg)" />
-
-      {[...Array(6)].map((_, i) => (
-        <rect
-          key={`px-${i}`}
-          x={60 + i * 32}
-          y={40}
-          width={28}
-          height={28}
-          rx={4}
-          fill="#C4B5FD"
-          opacity={0.15 + i * 0.08}
-        />
-      ))}
-      {[...Array(7)].map((_, i) => (
-        <rect
-          key={`px2-${i}`}
-          x={44 + i * 32}
-          y={72}
-          width={28}
-          height={28}
-          rx={4}
-          fill="#A78BFA"
-          opacity={0.2 + i * 0.06}
-        />
-      ))}
-
-      <path
-        d="M150 70 L150 70 C150 70 210 95 210 95 L210 165 C210 200 185 225 150 240 C115 225 90 200 90 165 L90 95 Z"
-        fill="url(#heroGrad1)"
-        stroke="#7C3AED"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M150 70 L210 95 L210 165 C210 200 185 225 150 240 Z"
-        fill="url(#heroGrad2)"
-        opacity="0.6"
-      />
-      <path
-        d="M150 80 L200 100 L200 160 C200 190 178 210 150 224 Z"
-        fill="url(#heroShine)"
-        opacity="0.4"
-      />
-
-      <circle cx="150" cy="148" r="16" fill="#0D0E12" opacity="0.8" />
-      <circle cx="150" cy="145" r="8" fill="none" stroke="#C4B5FD" strokeWidth="2.5" />
-      <rect x="147" y="150" width="6" height="14" rx="3" fill="#C4B5FD" />
-    </svg>
+    <SanctuaryLogoMark size="hero" showBlocks={true} />
   </motion.div>
 );
 
@@ -151,7 +76,7 @@ export default function LandingPage() {
               The Privacy Architecture<br />Protocol On COTI V2
             </h1>
             <p className="text-[14px] text-[#6B7280] leading-relaxed mb-6">
-              Autonomous dead-man's switch keeping your assets, private keys, and emergency escape funds 100% confidential on-chain using Garbled Circuits.
+              Autonomous dead-man&apos;s switch keeping your assets, private keys, and emergency escape funds 100% confidential on-chain using Garbled Circuits.
             </p>
             <Link
               href="/vault"
