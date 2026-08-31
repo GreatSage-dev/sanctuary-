@@ -75,8 +75,8 @@ const HeartbeatPulseGraphic = () => (
       <circle cx="100" cy="85" r="5" fill="#10B981" />
 
       {/* Frequency Labels */}
-      <text x="15" y="20" fill="#6B7280" fontSize="8" fontFamily="monospace" fontWeight="bold">LIVENESS WAVE</text>
-      <text x="165" y="20" fill="#10B981" fontSize="8" fontFamily="monospace" fontWeight="bold">100% PING SAFE</text>
+      <text x="15" y="20" fill="#4B5563" fontSize="8" fontFamily="monospace" fontWeight="bold">LIVENESS WAVE</text>
+      <text x="165" y="20" fill="#059669" fontSize="8" fontFamily="monospace" fontWeight="bold">100% PING SAFE</text>
     </svg>
 
     {/* Subtle pulsing background glow */}
@@ -126,8 +126,8 @@ const KeeperEnclaveGraphic = () => (
       <line x1="124" y1="52" x2="165" y2="50" stroke="#8B5CF6" strokeWidth="1" strokeDasharray="3 3" />
 
       {/* Labels */}
-      <text x="15" y="90" fill="#6B7280" fontSize="8" fontFamily="monospace" fontWeight="bold">COTI MPC ENCLAVE</text>
-      <text x="150" y="90" fill="#8B5CF6" fontSize="8" fontFamily="monospace" fontWeight="bold">1% BOUNTY</text>
+      <text x="15" y="90" fill="#4B5563" fontSize="8" fontFamily="monospace" fontWeight="bold">COTI MPC ENCLAVE</text>
+      <text x="150" y="90" fill="#7C3AED" fontSize="8" fontFamily="monospace" fontWeight="bold">1% BOUNTY</text>
     </svg>
 
     {/* Glow backdrop */}
@@ -198,63 +198,69 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
 
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        {/* ── Left: Large Dark Obsidian Card (7 cols) ── */}
+        {/* ── Left: Large Dark Obsidian Card (7 cols) — HIGH CONTRAST DARK MODE ── */}
         <div className="lg:col-span-7 card-obsidian p-7 md:p-9 flex flex-col justify-between min-h-[480px]">
           {/* Tag */}
           <div className="mb-6">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-coti-violet-light">
-              COTI V2 Garbled Vault
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-[11px] font-mono font-bold uppercase tracking-wider">
+              <Shield className="w-3.5 h-3.5 text-purple-400" />
+              COTI V2 GARBLED VAULT
             </span>
           </div>
 
           <div className="flex-1">
-            <h3 className="text-[22px] md:text-[26px] font-bold tracking-tight text-white mb-2">
+            <h3 className="text-[24px] md:text-[28px] font-extrabold tracking-tight text-white mb-3 leading-snug">
               Autonomous Encrypted Vaults
             </h3>
-            <p className="text-[13px] text-gray-400 leading-relaxed mb-6 max-w-md">
+            <p className="text-[14px] text-gray-300 leading-relaxed mb-6 max-w-md">
               Configure check-in intervals, garbled recipient addresses
-              (<code className="text-coti-violet-light font-mono text-[12px]">ctAddress</code>),
+              (<code className="text-cyan-300 font-mono text-[12px] font-semibold">ctAddress</code>),
               and private escape balances on COTI V2. Your target beneficiary
               is never visible on-chain.
             </p>
 
-            {/* Encrypted Payload Preview Box */}
-            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/[0.08] font-mono text-[11px] space-y-2.5">
-              <div className="flex items-center justify-between text-gray-500 pb-2 border-b border-white/[0.06]">
-                <span className="uppercase tracking-wider">On-Chain Payload</span>
+            {/* Encrypted Payload Preview Box — High-Contrast Dark Box */}
+            <div className="p-4 rounded-2xl bg-[#040405] border border-white/10 font-mono text-[11px] space-y-3 shadow-inner">
+              <div className="flex items-center justify-between text-gray-400 pb-2 border-b border-white/10">
+                <span className="uppercase tracking-wider font-bold text-[10px] text-gray-300">ON-CHAIN PAYLOAD</span>
                 <button
                   onClick={() => setShowRawAddress(!showRawAddress)}
-                  className="flex items-center gap-1 text-coti-violet-light hover:text-white transition-colors"
+                  className="flex items-center gap-1.5 text-purple-300 hover:text-white transition-colors font-bold text-[11px]"
                 >
-                  {showRawAddress ? <EyeOff className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
+                  {showRawAddress ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                   <span>{showRawAddress ? "Hide" : "Preview"}</span>
                 </button>
               </div>
+
               <div>
-                <span className="text-gray-500 block mb-0.5 text-[10px]">Recipient (gtAddress):</span>
-                <span className="text-coti-violet-light break-all">
+                <span className="text-gray-400 block mb-1 text-[10px]">Recipient (gtAddress):</span>
+                <span className="text-cyan-300 font-bold text-[12px] break-all">
                   {showRawAddress
                     ? "0x9f83a21b4c90e12d887a2b91c… (RAW — HIDDEN ON-CHAIN)"
                     : vault.encryptedRecipient}
                 </span>
               </div>
+
               <div>
-                <span className="text-gray-500 block mb-0.5 text-[10px]">Allocation (gtUint256):</span>
-                <span className="text-[#C4B5FD] break-all">{vault.encryptedAmount}</span>
+                <span className="text-gray-400 block mb-1 text-[10px]">Allocation (gtUint256):</span>
+                <span className="text-purple-300 font-bold text-[12px] break-all">{vault.encryptedAmount}</span>
               </div>
-              <div className="pt-2 border-t border-white/[0.05] flex items-center justify-between text-gray-500 text-[10px]">
-                <span>Interval: <strong className="text-white">{vault.checkInIntervalHours}h</strong></span>
-                <span className="text-coti-emerald">100% MPC Garbled</span>
+
+              <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px]">
+                <span className="text-gray-300">Interval: <strong className="text-white font-bold">{vault.checkInIntervalHours}h</strong></span>
+                <span className="text-emerald-400 font-bold flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> 100% MPC Garbled
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Graphic: Garbled Circuit Ring */}
-          <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/[0.06]">
+          {/* Graphic & Action Button */}
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/10">
             <GarbledRingSVG />
             <button
               onClick={onOpenPolicyModal}
-              className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-[12px] font-semibold transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              className="px-6 py-2.5 rounded-full bg-white hover:bg-gray-100 text-[#0D0E12] text-[13px] font-bold transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-md hover:shadow-lg"
             >
               Update Vault
             </button>
@@ -264,7 +270,7 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
         {/* ── Right Column: Stacked White Cards (5 cols) ── */}
         <div className="lg:col-span-5 flex flex-col gap-5">
           {/* Right Top White Card: Heartbeat Monitor */}
-          <div className="card-white p-6 flex flex-col justify-between relative overflow-hidden flex-1">
+          <div className="card-white p-6 flex flex-col justify-between relative overflow-hidden flex-1 border border-border-subtle shadow-card-elevated">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-coti-violet">
                 LIVENESS RHYTHM
@@ -294,7 +300,7 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
           </div>
 
           {/* Right Bottom White Card: Keeper Network */}
-          <div className="card-white p-6 flex flex-col justify-between flex-1">
+          <div className="card-white p-6 flex flex-col justify-between flex-1 border border-border-subtle shadow-card-elevated">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-coti-violet">
                 MPC KEEPERS
@@ -313,7 +319,7 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
               </h4>
               <p className="text-[13px] text-[#6B7280] leading-relaxed mb-3">
                 Public trigger allowing external keepers to call{" "}
-                <code className="font-mono text-[12px] text-coti-violet">executeEscape()</code>
+                <code className="font-mono text-[12px] text-coti-violet font-bold bg-purple-50 px-1.5 py-0.5 rounded">executeEscape()</code>
                 {" "}without learning the beneficiary.
               </p>
 
@@ -326,7 +332,7 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
                   <span>Simulating…</span>
                 ) : (
                   <>
-                    <Play className="w-3 h-3 fill-current" />
+                    <Play className="w-3 h-3 fill-current text-[#1A1A1A]" />
                     <span>Test Keeper Trigger</span>
                   </>
                 )}
@@ -337,15 +343,15 @@ export const BentoGateway: React.FC<BentoGatewayProps> = ({
                 <div
                   className={`mt-3 p-3 rounded-xl border text-[11px] font-mono leading-relaxed ${
                     keeperResult.success
-                      ? "bg-emerald-50 border-emerald-200 text-emerald-700"
-                      : "bg-amber-50 border-amber-200 text-amber-700"
+                      ? "bg-emerald-50 border-emerald-200 text-emerald-800 font-semibold"
+                      : "bg-amber-50 border-amber-200 text-amber-900 font-semibold"
                   }`}
                 >
                   <div className="flex items-center gap-1.5 font-bold mb-1">
                     {keeperResult.success ? (
-                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                     ) : (
-                      <AlertTriangle className="w-3.5 h-3.5" />
+                      <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
                     )}
                     <span>{keeperResult.success ? "EXECUTED" : "REVERTED"}</span>
                   </div>

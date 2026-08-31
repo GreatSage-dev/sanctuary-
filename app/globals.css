@@ -54,6 +54,14 @@ body {
   box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.04);
 }
 
+.card-obsidian {
+  background: #0D0E12;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.35);
+  color: #FFFFFF;
+}
+
 .hero-gradient {
   background: radial-gradient(100% 100% at 50% 0%, #EDE9FE 0%, #F3E8FF 50%, #F5F5F7 100%);
 }
