@@ -25,21 +25,27 @@ async function main() {
   const encAmount = ethers.keccak256(ethers.toUtf8Bytes("5000000000000000000000")); // 5000 COTI
 
   const SanctuaryVault = await ethers.getContractFactory("SanctuaryVault");
+  
+  // Pass explicit gasLimit override for COTI V2 Testnet
   const vault = await SanctuaryVault.deploy(
     intervalSeconds,
     gracePeriodSeconds,
     encRecipient,
-    encAmount
+    encAmount,
+    { gasLimit: 3000000 }
   );
 
+  console.log("⏳ Deployment transaction submitted! Waiting for COTI V2 block confirmation...");
   await vault.waitForDeployment();
 
   const vaultAddress = await vault.getAddress();
 
   console.log("--------------------------------------------------");
-  console.log("✅ SanctuaryVault Deployed Successfully!");
+  console.log("✅ SanctuaryVault Deployed Successfully to COTI V2!");
   console.log("Contract Address:", vaultAddress);
   console.log("Owner Address:   ", deployer.address);
+  console.log("--------------------------------------------------");
+  console.log("NEXT_PUBLIC_CONTRACT_ADDRESS=" + vaultAddress);
   console.log("--------------------------------------------------");
 }
 

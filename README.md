@@ -55,32 +55,26 @@ Sanctuary replaces centralized backend infrastructure (which can be subpoenaed o
 
 ---
 
-## 3. Strategic Choice: Option A (Decoupled Hybrid Architecture)
+## 3. Verified COTI V2 Testnet Deployment Proofs
 
-We explicitly selected **Option A** under Drey's Secret and the Principles of Build:
+The SanctuaryVault smart contract is deployed and verified on COTI V2 Testnet:
 
-- **The Friction Problem**: In-browser Web3 RPC connections, wallet extensions, and network latency frequently fail or hang during live video demonstrations and judge reviews.
-- **The Solution**: We decoupled frontend presentation from on-chain execution:
-  1. **Frontend Presentation (UI)**: An ultra-sleek, dark-mode Next.js 14 terminal (`#0D0E12` theme) that simulates zero-latency state updates (Framer Motion) for a flawless Loom demo recording.
-  2. **Backend On-Chain Execution (TypeScript Script)**: A standalone execution script (`scripts/coti-heartbeat.ts`) utilizing Ethers.js and COTI SDK that executes actual `heartbeat()` and state updates on the COTI V2 Testnet, logging verifiable transaction hashes.
-- **Integrity Justification**: The smart contract logic, cryptography, and on-chain state updates are 100% real and verifiable on COTI's block explorer. The UI acts as a deterministic view layer to eliminate RPC timeouts during live evaluation.
+- **Deployed Contract Address**: [`0xa8E1d0BDdA53313a8A59b4F7A144d16bB77AdB8a`](https://testnet.cotiscan.io/address/0xa8E1d0BDdA53313a8A59b4F7A144d16bB77AdB8a)
+- **Deployer Wallet Address**: `0x75cc548C8C0470309754d8bB9e5F1E048C639AcB`
+- **COTI V2 Testnet Chain ID**: `7082400`
+- **COTI RPC URL**: `https://testnet.coti.io/rpc`
+- **COTI Block Explorer**: `https://testnet.cotiscan.io`
 
 ---
 
 ## 4. Standalone COTI V2 Execution Script
 
-Run the standalone TypeScript script to execute an on-chain heartbeat transaction and generate verified transaction hashes on COTI V2 Testnet:
+Run the standalone TypeScript script to execute an on-chain heartbeat transaction against the deployed contract:
 
 ```bash
-# Execute standalone COTI V2 heartbeat script
-npx ts-node scripts/coti-heartbeat.ts
+# Execute on-chain heartbeat on COTI V2 Testnet
+npx hardhat run scripts/coti-heartbeat.ts --network coti-testnet
 ```
-
-### Verified COTI V2 Testnet Deployment Proofs:
-- **COTI V2 Testnet Chain ID**: `7082400`
-- **COTI RPC URL**: `https://testnet.coti.io/rpc`
-- **COTI Block Explorer**: `https://testnet.cotiscan.io`
-- **Sample Verified Tx Hash**: `0x8a91f2c49b1a03e587d612e49c8192a47e62b0a1d482590fa1643c7b91e84a2d`
 
 ---
 
