@@ -4,8 +4,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 import { AppHeader } from "@/components/AppHeader";
 import { BentoGateway } from "@/components/BentoGateway";
-import { StatusCard } from "@/components/StatusCard";
-import { ExecutionPanel } from "@/components/ExecutionPanel";
 import { PolicyModal } from "@/components/PolicyModal";
 import { PartnerFooter } from "@/components/PartnerFooter";
 import { VaultConfig, HeartbeatStatus } from "@/lib/types";
@@ -176,7 +174,7 @@ export default function VaultApp() {
       {/* Mode Banner */}
       {!isLive && (
         <div className="w-full bg-amber-50 border-b border-amber-200 text-center py-1.5 text-[12px] font-mono text-amber-700">
-          ⚡ Sanctuary Vault Application — Decoupled Zero-Latency Hybrid Mode (COTI V2 Testnet Ready)
+          ⚡ Sanctuary Vault Application — Interactive Preview Mode (COTI V2 Devnet Ready)
         </div>
       )}
 
@@ -250,14 +248,6 @@ export default function VaultApp() {
               )}
             </button>
           </div>
-        </div>
-      </section>
-
-      {/* Dedicated StatusCard & ExecutionPanel Grid */}
-      <section className="w-full max-w-7xl mx-auto px-6 md:px-10 pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <StatusCard vault={vault} onHeartbeatSent={handleSendHeartbeat} />
-          <ExecutionPanel vault={vault} />
         </div>
       </section>
 
